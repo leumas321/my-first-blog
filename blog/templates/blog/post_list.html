@@ -1,19 +1,12 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0//css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0//css/bootstrap-theme.min.css">
-        <title>Blog Django</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Blog Django</a></h1>
+{%extends 'blog/base.html'%}
+{%block content%}
+  {%for post in posts%}
+    <div class="post">
+      <div class="date">
+        <p>Publicado em:{{post.publish_date}}</p>
         </div>
-        <div >
-          {%for post in posts%}
-            <p>Publicado em:{{post.publish_date}}</p>
-            <p><a href="">{{post.title}}</a></p>
-            <p>{{post.text}}</p>
-          {%endfor%}
-        </div>
-    </body>
-</html>
+        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+        <p>{{post.text}}</p>
+      </div>
+  {%endfor%}
+{%endblock%}
